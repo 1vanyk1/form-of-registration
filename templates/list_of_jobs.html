@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <h2 align="center">Works log</h2>
+    {% for job in jobs %}
+        <h2>Action # {{job[0]}}</h2>
+        <table>
+            <tr style="background:LightGray">
+                <th>Title of activity</th>
+                <th>Team leader</th>
+                <th>Duration</th>
+                <th>List of collaborators</th>
+                <th>Is finished</th>
+            </tr>
+            <tr style="background:LightBlue">
+                <th>{{job[1]}}</th>
+                <th>{{job[2]}}</th>
+                <th>{{job[3]}}</th>
+                <th>{{job[4]}}</th>
+                {% if job[5] == False %}
+                    <td style="background:Pink">Is not finished</td>
+                {% else %}
+                    <td style="background:LightGreen">Is finished</td>
+                {% endif %}
+            </tr>
+        </table>
+    {% endfor %}
+</div>
+{% for field in form if field.name != 'csrf_token' %}
+<div>
+    {{ field.label() }}
+    {{ field() }}
+    {% for error in field.errors %}
+    <div class="error">{{ error }}</div>
+    {% endfor %}
+</div>
+{% endfor %}
+{% endblock %}
